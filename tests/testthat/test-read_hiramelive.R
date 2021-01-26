@@ -6,8 +6,9 @@ test_that("function exists", {
 })
 
 
+
 test_that("function reads and shapes csv properly", {
-  path2002 <- "../../data-raw/excel/2002_hiramelive.csv"
+  path2002 <- "excel/test_hiramelive.csv"
 
   hirame2002 <- read_hiramelive(path2002)
 
