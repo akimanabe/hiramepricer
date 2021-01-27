@@ -11,11 +11,13 @@
 #' }
 read_hiramelive <-
   function(fname){
-    suppressWarnings(suppressMessages(
-      readr::read_csv(fname))) %>%
-      dplyr::filter(!is.na(X2)) %>%
-      dplyr::rename(Location = 1) %>%
-      magrittr::set_colnames(., dplyr::filter(.,Location=="出荷地")) %>%
+    suppressMessages(
+      readr::read_csv(fname,
+                      col_names = FALSE)
+    ) %>%
+      dplyr::filter(!is.na(X3)) %>%
+      dplyr::mutate(X2 = replace(X2, X1 == "出荷地", "Type")) %>%
+      magrittr::set_colnames(., dplyr::slice(., 1)) %>%
       dplyr::rename(Location = 1,
                     Type = 2,
                     Sum = 3) %>%
