@@ -13,7 +13,7 @@ test_that("2002/1-12 data are correctly parsed", {
   expect_identical(
     hiramelive_2002 %>%
       dplyr::pull(Year) %>%
-      unique(), 2002
+      unique(), year
   )
 
   expect_identical(
