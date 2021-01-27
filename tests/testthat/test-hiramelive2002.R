@@ -3,8 +3,8 @@ context("test hiramelive_2002")
 data(hiramelive_2002)
 year <- 2002
 
-test_that("2002/1-12 data are correctly parsed", {
-  expect_identical(
+test_that("Month and Year are correctly parsed", {
+  expect_equal(
     hiramelive_2002 %>%
     dplyr::pull(Month) %>%
     unique(), c(1:12)
@@ -15,14 +15,18 @@ test_that("2002/1-12 data are correctly parsed", {
       dplyr::pull(Year) %>%
       unique(), year
   )
+})
 
+test_that("2002/01 Hokkaido quantity is correctly parsed", {
   expect_identical(
     hiramelive_2002 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
       dplyr::pull(quantity),
     23)
+})
 
+test_that("2002/01 Hokkaido total price is correctly parsed",{
   expect_identical(
     hiramelive_2002 %>%
       dplyr::filter(Location == "北海道",
@@ -30,5 +34,4 @@ test_that("2002/1-12 data are correctly parsed", {
       dplyr::pull(total_price),
     142811
   )
-
 })
