@@ -25,7 +25,7 @@ read_hiramelive <-
       dplyr::filter(Location != "出荷地") %>%
       tidyr::pivot_longer(cols = -c(1, 2), names_to = "Yearmonth", values_to = "Value") %>%
       dplyr::filter(Location != "合計") %>%
-      dplyr::mutate(Year = stringr::str_extract(Yearmonth, "平成[1-2][0-9]|令和[1-9]"),
+      dplyr::mutate(Year = stringr::str_extract(Yearmonth, "平成[1-3][0-9]|令和[0]?[1-9]|令和元"),
                     Month = stringr::str_extract(Yearmonth, "\\d?\\d(?=月)"),
                     Year = jy2ad(Year),
                     Month = as.double(Month)) %>%
