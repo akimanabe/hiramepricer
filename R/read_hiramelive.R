@@ -29,7 +29,7 @@ read_hiramelive <-
                     Month = stringr::str_extract(Yearmonth, "\\d?\\d(?=月)"),
                     Year = jy2ad(Year),
                     Month = as.double(Month)) %>%
-      dplyr::mutate(Value = stringr::str_extract(Value, "0|\\d.+")) %>%
+      dplyr::mutate(Value = stringr::str_extract(Value, "0|\\d\\d*")) %>%
       dplyr::mutate(Value = as.double(Value),
                     Type = factor(Type)) %>%
       dplyr::mutate(Type = dplyr::recode(Type,
