@@ -11,11 +11,13 @@
 #' }
 read_hiramelive <-
   function(fname){
-    suppressWarnings(suppressMessages(
-      readr::read_csv(fname))) %>%
-      dplyr::filter(!is.na(X2)) %>%
-      dplyr::rename(Location = 1) %>%
-      magrittr::set_colnames(., dplyr::filter(.,Location=="出荷地")) %>%
+    suppressMessages(
+      readr::read_csv(fname,
+                      col_names = FALSE)
+    ) %>%
+      dplyr::filter(!is.na(X3)) %>%
+      dplyr::mutate(X2 = replace(X2, X1 == "出荷地", "Type")) %>%
+      magrittr::set_colnames(., dplyr::slice(., 1)) %>%
       dplyr::rename(Location = 1,
                     Type = 2,
                     Sum = 3) %>%
@@ -23,11 +25,11 @@ read_hiramelive <-
       dplyr::filter(Location != "出荷地") %>%
       tidyr::pivot_longer(cols = -c(1, 2), names_to = "Yearmonth", values_to = "Value") %>%
       dplyr::filter(Location != "合計") %>%
-      dplyr::mutate(Year = stringr::str_extract(Yearmonth, "平成[1-2][0-9]|令和[1-9]"),
+      dplyr::mutate(Year = stringr::str_extract(Yearmonth, "平成[1-3][0-9]|令和[0]?[1-9]|令和元"),
                     Month = stringr::str_extract(Yearmonth, "\\d?\\d(?=月)"),
                     Year = jy2ad(Year),
                     Month = as.double(Month)) %>%
-      dplyr::mutate(Value = stringr::str_extract(Value, "0|\\d.+")) %>%
+      dplyr::mutate(Value = stringr::str_extract(Value, "0|\\d\\d*")) %>%
       dplyr::mutate(Value = as.double(Value),
                     Type = factor(Type)) %>%
       dplyr::mutate(Type = dplyr::recode(Type,
