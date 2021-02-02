@@ -2,5 +2,6 @@
 
 export("%>%")
 export(jy2ad)
+export(load_price)
 export(read_hiramelive)
 importFrom(magrittr,"%>%")
