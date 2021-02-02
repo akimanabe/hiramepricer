@@ -1,3 +1,12 @@
+#' load price data for live hirame in Tokyo Central Market
+#'
+#' @return tibble with price of live hirame in Tokyo
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' load_price()
+#' }
 load_price <-
   function(){
   hiramelive_2002 %>%
