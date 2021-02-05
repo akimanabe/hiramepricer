@@ -42,3 +42,17 @@ test_that("function extracts meigara properly", {
                      unique(),
                    "Live")
 })
+
+test_that("output has yearmonth column", {
+  expect_is(hirame2002 %>%
+              dplyr::pull(Date), "Date")
+
+  expect_identical(hirame2002 %>%
+                     dplyr::filter(Year == 2002,
+                                   Month == 1,
+                                   Location == "北海道") %>%
+                     dplyr::pull(Date) %>%
+                     unique() %>%
+                     as.character(),
+                   "2002-01-01")
+})

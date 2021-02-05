@@ -48,6 +48,7 @@ read_hiramelive <-
                                             "活" = "Live"),
                     Meigara = tidyr::replace_na(Meigara, "Fresh"),
                     Species = stringr::str_remove(Species, "活|（国内）")) %>%
-      dplyr::select(Year, Month, Location, Species, Meigara, Type, Value) %>%
+      dplyr::mutate(Date = as.Date(paste(Year, Month, "01", sep = "-"))) %>%
+      dplyr::select(Date, Year, Month, Location, Species, Meigara, Type, Value) %>%
       tidyr::pivot_wider(names_from = "Type", values_from = "Value")
   }
