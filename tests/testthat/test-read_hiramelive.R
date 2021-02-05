@@ -30,3 +30,17 @@ test_that("function reads and shapes csv properly", {
                c(0, NA)
                )
 })
+
+test_that("function extracts species properly", {
+  expect_identical(hirame2002 %>%
+                     dplyr::pull(Species) %>%
+                     unique(),
+                   "ヒラメ")
+})
+
+test_that("function extracts meigara properly", {
+  expect_identical(hirame2002 %>%
+                     dplyr::pull(Meigara) %>%
+                     unique(),
+                   "Live")
+})
