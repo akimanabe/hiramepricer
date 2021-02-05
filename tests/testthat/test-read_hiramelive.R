@@ -5,25 +5,23 @@ test_that("function exists", {
   expect_is(read_hiramelive, "function")
 })
 
+path2002 <- "excel/test_hiramelive.csv"
+hirame2002 <- read_hiramelive(path2002)
 
 
 test_that("function reads and shapes csv properly", {
-  path2002 <- "excel/test_hiramelive.csv"
-
-  hirame2002 <- read_hiramelive(path2002)
-
   expect_is(hirame2002, "data.frame")
 
   expect_equal(hirame2002 %>%
                  dplyr::filter(Location == "北海道",
                                Year == "2002",
                                Month == "1") %>%
-                 dplyr::pull(quantity),
+                 dplyr::pull(Quantity),
                23)
 
   expect_equal(hirame2002 %>%
-                 dplyr::mutate(avg = total_price / quantity) %>%
-                 dplyr::mutate(diff = average_price - avg) %>%
+                 dplyr::mutate(avg = Price / Quantity) %>%
+                 dplyr::mutate(diff = Avg_price - avg) %>%
                  dplyr::mutate(diff = round(diff)) %>%
                  dplyr::pull(diff) %>%
                  unique(),
@@ -35,7 +33,7 @@ test_that("function extracts species properly", {
   expect_identical(hirame2002 %>%
                      dplyr::pull(Species) %>%
                      unique(),
-                   "ヒラメ")
+                   "ひらめ")
 })
 
 test_that("function extracts meigara properly", {

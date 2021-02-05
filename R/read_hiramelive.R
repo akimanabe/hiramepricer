@@ -15,15 +15,22 @@ read_hiramelive <-
       readr::read_csv(fname,
                       col_names = FALSE)
     ) %>%
+      dplyr::mutate(
+        Names = stringr::str_extract(
+          dplyr::slice(., 1) %>%
+            dplyr::select(X1),
+          "(?<=（).+(?=）)"
+        )) %>%
       dplyr::filter(!is.na(X3)) %>%
       dplyr::mutate(X2 = replace(X2, X1 == "出荷地", "Type")) %>%
       magrittr::set_colnames(., dplyr::slice(., 1)) %>%
       dplyr::rename(Location = 1,
                     Type = 2,
-                    Sum = 3) %>%
+                    Sum = 3,
+                    Species = 16) %>%
       dplyr::select(-Sum) %>%
       dplyr::filter(Location != "出荷地") %>%
-      tidyr::pivot_longer(cols = -c(1, 2), names_to = "Yearmonth", values_to = "Value") %>%
+      tidyr::pivot_longer(cols = -c(1, 2, 15), names_to = "Yearmonth", values_to = "Value") %>%
       dplyr::filter(Location != "合計") %>%
       dplyr::mutate(Year = stringr::str_extract(Yearmonth, "平成[1-3][0-9]|令和[0]?[1-9]|令和元"),
                     Month = stringr::str_extract(Yearmonth, "\\d?\\d(?=月)"),
@@ -33,11 +40,14 @@ read_hiramelive <-
       dplyr::mutate(Value = as.double(Value),
                     Type = factor(Type)) %>%
       dplyr::mutate(Type = dplyr::recode(Type,
-                                         '数量' = "quantity",
-                                         '金額' = "total_price",
-                                         '平均価格' = "average_price")) %>%
-      dplyr::select(Year, Month, Location, Type, Value) %>%
+                                         '数量' = "Quantity",
+                                         '金額' = "Price",
+                                         '平均価格' = "Avg_price")) %>%
+      dplyr::mutate(Meigara = stringr::str_extract(Species, "活"),
+                    Meigara = dplyr::recode(Meigara,
+                                            "活" = "Live"),
+                    Meigara = tidyr::replace_na(Meigara, "Fresh"),
+                    Species = stringr::str_remove(Species, "活|（国内）")) %>%
+      dplyr::select(Year, Month, Location, Species, Meigara, Type, Value) %>%
       tidyr::pivot_wider(names_from = "Type", values_from = "Value")
   }
-
-
