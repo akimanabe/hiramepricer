@@ -11,3 +11,24 @@ test_that("jy2ad() converts JP years into AD years", {
   expect_equal(jy2ad(kanji),               expected)
   expect_equal(jy2ad(single_kanji),        expected)
 })
+
+context("sort_prefec")
+
+test_that("sort prefec sorts prefec names correctly", {
+  expect_is(sort_prefec, "function")
+  expect_is(sort_prefec(c("茨城", "北海道")), "factor")
+  expect_equal(sort_prefec(c("千葉")) %>%
+                     levels() %>%
+                     length(), 47)
+})
+
+context("prefec_eng")
+
+test_that("prefec eng convert prefec to English", {
+  expect_is(prefec_eng, "function")
+  expect_equal(sort_prefec(c("千葉")) %>%
+                 levels() %>%
+                 prefec_eng() %>%
+                 .[1],
+               "Hokkaido")
+})
