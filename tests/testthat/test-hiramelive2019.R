@@ -22,7 +22,7 @@ test_that("2019/01 Hokkaido is correctly parsed", {
     hiramelive_2019 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(quantity),
+      dplyr::pull(Quantity),
     104
   )
 
@@ -30,7 +30,7 @@ test_that("2019/01 Hokkaido is correctly parsed", {
     hiramelive_2019 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(total_price),
+      dplyr::pull(Price),
     290454
   )
 

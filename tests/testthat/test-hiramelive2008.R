@@ -22,14 +22,14 @@ test_that("2008/01 Hokkaido is correctly parsed", {
     hiramelive_2008 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(quantity),
+      dplyr::pull(Quantity),
     72)
 
   expect_identical(
     hiramelive_2008 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(total_price),
+      dplyr::pull(Price),
     302381
   )
 
