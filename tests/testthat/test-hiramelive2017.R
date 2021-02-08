@@ -22,7 +22,7 @@ test_that("2017/01 Hokkaido is correctly parsed", {
     hiramelive_2017 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(quantity),
+      dplyr::pull(Quantity),
     30
   )
 
@@ -30,8 +30,31 @@ test_that("2017/01 Hokkaido is correctly parsed", {
     hiramelive_2017 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(total_price),
+      dplyr::pull(Price),
     92070
   )
 
+})
+
+test_that("Species, meigara, and date are correctly parsed", {
+  expect_identical(
+    hiramelive_2017 %>%
+      dplyr::pull(Species) %>%
+      unique(), "ひらめ"
+  )
+
+  expect_identical(
+    hiramelive_2017 %>%
+      dplyr::pull(Meigara) %>%
+      unique(), "Live"
+  )
+
+  expect_identical(
+    hiramelive_2017 %>%
+      dplyr::filter(Year == 2017,
+                    Month == 1) %>%
+      dplyr::pull(Date) %>%
+      unique(),
+    as.Date("2017-01-01")
+  )
 })
