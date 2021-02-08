@@ -33,3 +33,26 @@ test_that("2007/01 Hokkaido is correctly parsed", {
     1088391
   )
 })
+
+test_that("Species, meigara, and date are correctly parsed", {
+  expect_identical(
+    hiramelive_2007 %>%
+      dplyr::pull(Species) %>%
+      unique(), "ひらめ"
+  )
+
+  expect_identical(
+    hiramelive_2007 %>%
+      dplyr::pull(Meigara) %>%
+      unique(), "Live"
+  )
+
+  expect_identical(
+    hiramelive_2007 %>%
+      dplyr::filter(Year == 2007,
+                    Month == 1) %>%
+      dplyr::pull(Date) %>%
+      unique(),
+    as.Date("2007-01-01")
+  )
+})

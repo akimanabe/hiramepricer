@@ -35,3 +35,26 @@ test_that("2004/01 Hokkaido total price is correctly parsed",{
     144124
   )
 })
+
+test_that("Species, meigara, and date are correctly parsed", {
+  expect_identical(
+    hiramelive_2004 %>%
+      dplyr::pull(Species) %>%
+      unique(), "ひらめ"
+  )
+
+  expect_identical(
+    hiramelive_2004 %>%
+      dplyr::pull(Meigara) %>%
+      unique(), "Live"
+  )
+
+  expect_identical(
+    hiramelive_2004 %>%
+      dplyr::filter(Year == 2004,
+                    Month == 1) %>%
+      dplyr::pull(Date) %>%
+      unique(),
+    as.Date("2004-01-01")
+  )
+})
