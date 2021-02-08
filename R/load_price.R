@@ -27,5 +27,25 @@ load_price <-
                      hiramelive_2017,
                      hiramelive_2018,
                      hiramelive_2019,
-                     hiramelive_2020)
+                     hiramelive_2020,
+                     hiramefresh_2002,
+                     hiramefresh_2003,
+                     hiramefresh_2004,
+                     hiramefresh_2005,
+                     hiramefresh_2006,
+                     hiramefresh_2007,
+                     hiramefresh_2008,
+                     hiramefresh_2009,
+                     hiramefresh_2010,
+                     hiramefresh_2011,
+                     hiramefresh_2012,
+                     hiramefresh_2013,
+                     hiramefresh_2014,
+                     hiramefresh_2015,
+                     hiramefresh_2016,
+                     hiramefresh_2017,
+                     hiramefresh_2018,
+                     hiramefresh_2019,
+                     hiramefresh_2020) %>%
+      dplyr::arrange(Year, Month, Location, Meigara)
 }
