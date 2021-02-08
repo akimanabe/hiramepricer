@@ -47,5 +47,8 @@ load_price <-
                      hiramefresh_2018,
                      hiramefresh_2019,
                      hiramefresh_2020) %>%
+      dplyr::mutate(Location =
+                      dplyr::recode(Location, "沖繩" = "沖縄")) %>%
+      dplyr::mutate(Location = sort_prefec(Location)) %>%
       dplyr::arrange(Year, Month, Location, Meigara)
 }
