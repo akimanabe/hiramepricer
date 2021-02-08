@@ -19,6 +19,15 @@ test_that("function reads 40 prefecs", {
       dplyr::pull(Location) %>%
       unique() %>%
       length(),
-    40
+    42
+  )
+})
+
+test_that("function combines live and fresh meigaras", {
+  expect_equal(
+    load_price() %>%
+      dplyr::pull(Meigara) %>%
+      unique(),
+    c("Fresh", "Live")
   )
 })

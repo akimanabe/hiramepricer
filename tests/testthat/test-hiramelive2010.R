@@ -22,15 +22,38 @@ test_that("2010/01 Hokkaido is correctly parsed", {
     hiramelive_2010 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(quantity),
+      dplyr::pull(Quantity),
     61)
 
   expect_identical(
     hiramelive_2010 %>%
       dplyr::filter(Location == "北海道",
                     Month == 1) %>%
-      dplyr::pull(total_price),
+      dplyr::pull(Price),
     180570
   )
 
+})
+
+test_that("Species, meigara, and date are correctly parsed", {
+  expect_identical(
+    hiramelive_2010 %>%
+      dplyr::pull(Species) %>%
+      unique(), "ひらめ"
+  )
+
+  expect_identical(
+    hiramelive_2010 %>%
+      dplyr::pull(Meigara) %>%
+      unique(), "Live"
+  )
+
+  expect_identical(
+    hiramelive_2010 %>%
+      dplyr::filter(Year == 2010,
+                    Month == 1) %>%
+      dplyr::pull(Date) %>%
+      unique(),
+    as.Date("2010-01-01")
+  )
 })
