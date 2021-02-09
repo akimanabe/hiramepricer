@@ -26,7 +26,7 @@ test_that("2004/01 Hokkaido quantity is correctly parsed", {
     23)
 })
 
-test_that("2004/01 Hokkaido total price is correctly parsed",{
+test_that("2004/01 Hokkaido total price is correctly parsed", {
   expect_identical(
     hiramelive_2004 %>%
       dplyr::filter(Location == "北海道",

@@ -41,7 +41,7 @@ jy2ad <- function(jpyear) {
 #' @param dat Prefec vector
 #'
 #' @return factor with prefec levels
-sort_prefec <- function(dat){
+sort_prefec <- function(dat) {
   factor(dat, levels = c(
     "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島",
     "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川",
@@ -57,7 +57,7 @@ sort_prefec <- function(dat){
 #' @param dat Location vector
 #'
 #' @return English-translated prefec name
-prefec_eng <- function(dat){
+prefec_eng <- function(dat) {
   dplyr::recode(dat,
                 "北海道" = "Hokkaido",
                 "青森" = "Aomori",
@@ -103,9 +103,8 @@ prefec_eng <- function(dat){
                 "長崎" = "Nagasaki",
                 "熊本" = "Kumamoto",
                 "大分" = "Oita",
-                "宮崎" ="Miyazaki",
+                "宮崎" = "Miyazaki",
                 "鹿児島" = "Kagoshima",
                 "沖縄" = "Okinawa"
   )
 }
-
