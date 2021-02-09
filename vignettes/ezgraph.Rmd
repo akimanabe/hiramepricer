@@ -1,0 +1,46 @@
+---
+title: "ezgraph"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ezgraph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+devtools::load_all()
+library(ggplot2)
+```
+
+# 太平洋中区ヒラメ（活魚）入荷数量
+```{r, fig.height = 5, fig.width = 9}
+chuku <- load_price() %>%
+  dplyr::filter(Location %in% c("千葉", "神奈川", "静岡", "愛知", "三重")) %>%
+  tidyr::drop_na(Avg_price)
+
+# Live hirame from chuku
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Live"),
+       aes(x = Date, y = Quantity, color = Location)) +
+geom_line() +
+  theme_bw() +
+  labs(y = "入荷数量(kg)")
+```
+
+# 太平洋中区ヒラメ（鮮魚）入荷数量
+```{r, fig.height = 5, fig.width = 9}
+# Fresh hirame from chuku
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Date, y = Quantity, color = Location)) +
+geom_line() +
+  theme_bw() +
+  labs(y = "入荷数量(kg)")
+```
