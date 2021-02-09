@@ -21,6 +21,7 @@ Imports:
     stringr,
     stringi
 Suggests: 
-    testthat
+    testthat,
+    covr
 Depends: 
     R (>= 2.10)
