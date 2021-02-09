@@ -1,4 +1,4 @@
-#' Read hirame (live) market stats for Tokyo central market
+#' Read market price stats for Tokyo central market
 #'
 #' @param fname file name
 #'
@@ -7,9 +7,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' read_hiramelive("../data-raw/excel/2002_hiramelive.csv")
+#' read_price("../data-raw/excel/2002_hiramelive.csv")
 #' }
-read_hiramelive <-
+read_price <-
   function(fname){
     suppressMessages(
       readr::read_csv(fname,
