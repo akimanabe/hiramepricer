@@ -8,7 +8,7 @@
 #' load_price()
 #' }
 load_price <-
-  function(){
+  function() {
   hiramelive_2002 %>%
     dplyr::bind_rows(hiramelive_2003,
                      hiramelive_2004,

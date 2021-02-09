@@ -1,12 +1,12 @@
-context("read_hiramelive")
+context("read_price")
 
 
 test_that("function exists", {
-  expect_is(read_hiramelive, "function")
+  expect_is(read_price, "function")
 })
 
 path2002 <- "excel/test_hiramelive.csv"
-hirame2002 <- read_hiramelive(path2002)
+hirame2002 <- read_price(path2002)
 
 
 test_that("function reads and shapes csv properly", {
