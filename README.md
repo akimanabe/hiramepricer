@@ -1,6 +1,6 @@
 # hiramepricer
   <!-- badges: start -->
-  [![Travis build status](https://travis-ci.com/akimanabe/hiramepricer.svg?branch=master)](https://travis-ci.com/akimanabe/hiramepricer)
+  [![R-CMD-check](https://github.com/akimanabe/hiramepricer/workflows/R-CMD-check/badge.svg)](https://github.com/akimanabe/hiramepricer/actions)
   <!-- badges: end -->
   
     <!-- badges: start -->
