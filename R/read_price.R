@@ -12,7 +12,7 @@
 read_price <-
   function(fname) {
     suppressMessages(
-      readr::read_csv(fpath,
+      readr::read_csv(fname,
                       col_names = FALSE)
     ) %>%
       dplyr::mutate(

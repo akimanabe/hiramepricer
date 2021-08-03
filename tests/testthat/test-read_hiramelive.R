@@ -5,7 +5,7 @@ test_that("function exists", {
   expect_is(read_price, "function")
 })
 
-path2002 <- "excel/test_hiramelive.csv"
+path2002 <- "./excel/test_hiramelive.csv"
 hirame2002 <- read_price(path2002)
 
 
@@ -55,4 +55,31 @@ test_that("output has yearmonth column", {
                      unique() %>%
                      as.character(),
                    "2002-01-01")
+})
+
+test_that("read_price can read non-12 month data", {
+  path_6month <- "excel/test_hiramelive_6months.csv"
+  hirame6 <- read_price(path_6month)
+
+  expect_equal(hirame6 %>%
+                 dplyr::filter(Location == "北海道",
+                               Year == "2002",
+                               Month == "6") %>%
+                 dplyr::pull(Quantity),
+               1862)
+
+  expect_equal(hirame6 %>%
+                 dplyr::filter(Location == "北海道",
+                               Year == "2002",
+                               Month == "6") %>%
+                 dplyr::pull(Price),
+               3504020)
+
+  expect_equal(hirame6 %>%
+                 dplyr::filter(Location == "北海道",
+                               Year == "2002",
+                               Month == "6") %>%
+                 dplyr::pull(Avg_price),
+               1882)
+
 })
