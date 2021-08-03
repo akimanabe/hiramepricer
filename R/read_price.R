@@ -12,7 +12,7 @@
 read_price <-
   function(fname) {
     suppressMessages(
-      readr::read_csv(fname,
+      readr::read_csv(fpath,
                       col_names = FALSE)
     ) %>%
       dplyr::mutate(
@@ -27,10 +27,10 @@ read_price <-
       dplyr::rename(Location = 1,
                     Type = 2,
                     Sum = 3,
-                    Species = 16) %>%
+                    Species = ncol(.)) %>%
       dplyr::select(-Sum) %>%
       dplyr::filter(Location != "出荷地") %>%
-      tidyr::pivot_longer(cols = -c(1, 2, 15),
+      tidyr::pivot_longer(cols = -c(1, 2, ncol(.)),
                           names_to = "Yearmonth",
                           values_to = "Value") %>%
       dplyr::filter(Location != "合計") %>%
