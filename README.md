@@ -1,6 +1,9 @@
 # hiramepricer
   <!-- badges: start -->
-  [![Travis build status](https://travis-ci.com/akimanabe/hiramepricer.svg?branch=master)](https://travis-ci.com/akimanabe/hiramepricer)
-  [![codecov](https://codecov.io/gh/akimanabe/hiramepricer/branch/master/graph/badge.svg?token=2BZN1P654E)](https://codecov.io/gh/akimanabe/hiramepricer)
+  [![R-CMD-check](https://github.com/akimanabe/hiramepricer/workflows/R-CMD-check/badge.svg)](https://github.com/akimanabe/hiramepricer/actions)
+  <!-- badges: end -->
+  
+    <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/akimanabe/hiramepricer/branch/master/graph/badge.svg)](https://codecov.io/gh/akimanabe/hiramepricer?branch=master)
   <!-- badges: end -->
 Database for hirame price in Tokyo Central Market

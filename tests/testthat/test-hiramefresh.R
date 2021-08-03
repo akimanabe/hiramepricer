@@ -453,3 +453,27 @@ test_that("Price for January Hokkaido is parsed properly", {
       unique, "ひらめ"
   )
 })
+
+context("hiramefresh 2021")
+
+test_that("Price for January Hokkaido is parsed properly", {
+  expect_identical(
+    hiramefresh_2021 %>%
+      dplyr::filter(Month == 01,
+                    Location == "北海道") %>%
+      dplyr::pull(Quantity) %>%
+      unique(), 7226
+  )
+
+  expect_identical(
+    hiramefresh_2021 %>%
+      dplyr::pull(Meigara) %>%
+      unique, "Fresh"
+  )
+
+  expect_identical(
+    hiramefresh_2021 %>%
+      dplyr::pull(Species) %>%
+      unique, "ひらめ"
+  )
+})

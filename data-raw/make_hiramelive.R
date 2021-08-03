@@ -133,3 +133,10 @@ hiramelive_2020 <-
   read_price(fname = "./data-raw/excel/2020_hiramelive.csv")
 
 usethis::use_data(hiramelive_2020, overwrite = TRUE)
+
+## 2021 up to 202106 ----
+
+hiramelive_2021 <-
+  read_price(fname = "./data-raw/excel/2021_hiramelive.csv")
+
+usethis::use_data(hiramelive_2021, overwrite = TRUE)
