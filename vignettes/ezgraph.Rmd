@@ -54,6 +54,7 @@ geom_line() +
 ```
 
 ### 太平洋中区ヒラメ（鮮魚）入荷数量
+
 ```{r, fig.height = 5, fig.width = 9}
 # Fresh hirame from chuku
 
@@ -63,6 +64,7 @@ geom_line() +
   theme_bw() +
   labs(y = "入荷数量(kg)")
 ```
+
 
 ## 金額
 
