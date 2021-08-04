@@ -19,11 +19,30 @@ devtools::load_all()
 library(ggplot2)
 ```
 
-# 太平洋中区ヒラメ（活魚）入荷数量
+# 太平洋中区ヒラメ
+
+本データは東京都中央卸売市場への入荷数量と価格のデータです。
+データは[東京都中央卸売市場 - 市場統計情報（月報・年報）](https://www.shijou-tokei.metro.tokyo.lg.jp/)より抽出しています。
+
+太平洋中区は以下の県で構成されています。
+
+- 千葉
+- 東京
+- 神奈川
+- 静岡
+- 愛知
+- 三重
+
+
+## 入荷数量
+
+### 太平洋中区ヒラメ（活魚）入荷数量
 ```{r, fig.height = 5, fig.width = 9}
 chuku <- load_price() %>%
-  dplyr::filter(Location %in% c("千葉", "神奈川", "静岡", "愛知", "三重")) %>%
-  tidyr::drop_na(Avg_price)
+  dplyr::filter(Location %in% c("千葉", "東京", "神奈川", "静岡", "愛知", "三重")) %>%
+  tidyr::drop_na(Avg_price) %>%
+  dplyr::mutate(Month = factor(Month),
+                Year = factor(Year))
 
 # Live hirame from chuku
 
@@ -34,7 +53,7 @@ geom_line() +
   labs(y = "入荷数量(kg)")
 ```
 
-# 太平洋中区ヒラメ（鮮魚）入荷数量
+### 太平洋中区ヒラメ（鮮魚）入荷数量
 ```{r, fig.height = 5, fig.width = 9}
 # Fresh hirame from chuku
 
@@ -43,4 +62,70 @@ ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
 geom_line() +
   theme_bw() +
   labs(y = "入荷数量(kg)")
+```
+
+## 金額
+
+### 太平洋中区ヒラメ（活魚）入荷金額（キロ当たり）
+```{r, fig.height = 5, fig.width = 9}
+# Live hirame from chuku
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Live"),
+       aes(x = Date, y = Avg_price,
+           color = Location)) +
+geom_line() +
+  theme_bw() +
+  labs(y = "入荷金額(円／kg)")
+```
+
+### 太平洋中区ヒラメ（鮮魚）入荷金額（キロ当たり）
+```{r, fig.height = 5, fig.width = 9}
+# Fresh hirame from chuku
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Date, y = Avg_price,
+           color = Location)) +
+geom_line() +
+  theme_bw() +
+  labs(y = "入荷金額(円／kg)") +
+  coord_cartesian(ylim = c(0, 5000))
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Quantity, y = Price,
+           color = Location)) +
+geom_point() +
+  theme_bw() +
+  labs(x = "入荷数量(kg)",
+       y = "入荷金額(円)")
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Quantity, y = Price,
+           color = Location)) +
+geom_point() +
+  theme_bw() +
+  labs(x = "入荷数量(kg)",
+       y = "入荷金額(円)") +
+  scale_x_log10() +
+  scale_y_log10()
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Quantity, y = Price,
+           color = Year)) +
+geom_point() +
+  theme_bw() +
+  labs(x = "入荷数量(kg)",
+       y = "入荷金額(円)") +
+  scale_x_log10() +
+  scale_y_log10()
+
+ggplot(chuku %>% dplyr::filter(Meigara == "Fresh"),
+       aes(x = Quantity, y = Price,
+           color = Month)) +
+geom_point() +
+  theme_bw() +
+  labs(x = "入荷数量(kg)",
+       y = "入荷金額(円)") +
+  scale_x_log10() +
+  scale_y_log10()
+
 ```
