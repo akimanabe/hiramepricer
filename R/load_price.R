@@ -28,6 +28,7 @@ load_price <-
                      hiramelive_2018,
                      hiramelive_2019,
                      hiramelive_2020,
+                     hiramelive_2021,
                      hiramefresh_2002,
                      hiramefresh_2003,
                      hiramefresh_2004,
@@ -46,7 +47,8 @@ load_price <-
                      hiramefresh_2017,
                      hiramefresh_2018,
                      hiramefresh_2019,
-                     hiramefresh_2020) %>%
+                     hiramefresh_2020,
+                     hiramefresh_2021) %>%
       dplyr::mutate(Location =
                       dplyr::recode(Location, "沖繩" = "沖縄")) %>%
       dplyr::mutate(Location = sort_prefec(Location)) %>%
